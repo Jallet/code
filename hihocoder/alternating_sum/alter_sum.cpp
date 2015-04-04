@@ -17,15 +17,22 @@ int get_sum(long source, hash_map<long, value> *map) {
     hash_map<long, value>::iterator iter;
     int sum = 0; 
     if ((iter = map->find(left)) != end) {
-        if (iter->second.odd == ODD) {
-            sum = iter->second.sum - right;
-        } 
-        else {
-            sum = iter->second.sum + right;
-        }
+        sum = iter->second.sum;
     }
     else {
-        sum = get_sum(left, map);   
+        if (left == 0) {
+            sum = 0; 
+        }
+        else {
+            sum = get_sum(left, map);
+        }
+    }
+
+    if (iter->second.odd == ODD) {
+        sum = iter->second.sum - right;
+    } 
+    else {
+        sum = iter->second.sum + right;
     }
 
     value *temp = new value;
